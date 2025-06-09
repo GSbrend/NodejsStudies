@@ -33,6 +33,7 @@ const server = http.createServer();
 //escutar eventos do servidor
 server.on('request', (req, res) => {
     console.log('Recebi uma nova solicitação!')
+    console.log(req.url);
     res.end('Recebi uma solicitação!');
 });
 
