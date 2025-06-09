@@ -2,7 +2,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const start = Date.now();
 //=========== HOW TO CHANGE THE THREADPOOLSIZE
-process.env.UV_THREADPOOL_SIZE = 2;
+process.env.UV_THREADPOOL_SIZE = 1;
 console.log('I/O finished');
 //
 setTimeout(() => console.log('Time 1 is out!'), 0);
@@ -15,14 +15,14 @@ fs.readFile('test-file.txt',() => {
 
     process.nextTick(() => console.log('wtf'));
 // CRYPTO SYNC
-    crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
-    console.log(Date.now() - start, 'password encrypted');
-    crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
-    console.log(Date.now() - start, 'password encrypted');
-    crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
-    console.log(Date.now() - start, 'password encrypted');
-    crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
-    console.log(Date.now() - start, 'password encrypted');
+    // crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
+    // console.log(Date.now() - start, 'password encrypted');
+    // crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
+    // console.log(Date.now() - start, 'password encrypted');
+    // crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
+    // console.log(Date.now() - start, 'password encrypted');
+    // crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512');
+    // console.log(Date.now() - start, 'password encrypted');
 
 // CRYPTO ASSYNC    
     crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>{
