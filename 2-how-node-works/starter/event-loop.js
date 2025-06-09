@@ -2,7 +2,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const start = Date.now();
 //=========== HOW TO CHANGE THE THREADPOOLSIZE
-process.env.UV_THREADPOOL_SIZE = 4;
+process.env.UV_THREADPOOL_SIZE = 2;
 console.log('I/O finished');
 //
 setTimeout(() => console.log('Time 1 is out!'), 0);
