@@ -15,16 +15,16 @@ setImmediate(() => console.log('immediate 1 finished'));
 
 process.nextTick(() => console.log('wtf'));
 
-crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>{
+crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512', () =>{
     console.log(Date.now() - start, 'password encrypted');
 });
-crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>{
+crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512', () =>{
     console.log(Date.now() - start, 'password encrypted');
 });
-crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>{
+crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512', () =>{
     console.log(Date.now() - start, 'password encrypted');
 });
-crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>{
+crypto.pbkdf2Sync('password', 'salt', 100000, 1024, 'sha512', () =>{
     console.log(Date.now() - start, 'password encrypted');
 });
 });
