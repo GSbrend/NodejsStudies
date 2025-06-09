@@ -37,7 +37,7 @@ server.on('request', (req, res) => {
 });
 
 server.on('request', (req, res) => {
-    res.end('Outra solicitação');
+    console.log('Outra solicitação');
 });
 
 server.on('close', () => {
