@@ -40,23 +40,13 @@ const writeFilePro = (file, data) => {
   });
 };
 
-// Using the readFilePro function to read the dog.txt file
-// syntax: readFilePro("filename")
 readFilePro(`${__dirname}/dog.txt`)
-  // Using the readFile function from fs/promises to read the file
   .then((data) => {
     console.log(`Raça: ${data}`);
-    // Using superagent to fetch a random dog image from the API
     return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
   })
-  // if successful, the response will contain the random dog image URL
   .then((res) => {
-    // showing the random dog image URL
-    // res.body.message contains the URL of the random dog image
     console.log(res.body.message);
-    // Using the writeFilePro function to write the random dog image URL to a file
-    // Writing the random dog image URL to a file named dog-img.txt
-    // syntax: writeFilePro("filename", data)
     return writeFilePro("dog-img.txt", res.body.message);
   })
   .then(() => {
