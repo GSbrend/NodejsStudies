@@ -36,5 +36,11 @@ server.on('request', (req, res) => {
     readable.on('end', () => {
         res.end();
     })
+//when something goes wrong
+    readable.on('error', err => {
+        console.log(err);
+        res.status(500);
+        res.end('file not found!');
+    })
 });
 
