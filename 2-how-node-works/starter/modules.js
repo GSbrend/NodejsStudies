@@ -9,8 +9,8 @@ console.log(calc1.add(5, 12));
 
 // using export
 // saving into a variable
-const calc2 = require("./testmodule2");
-console.log(calc2.multiply(5, 12));
+// const calc2 = require("./testmodule2");
+// console.log(calc2.multiply(5, 12));
 // using destructuring
 const { add, devide, multiply } = require("./testmodule2");
 console.log(add(5, 12));
