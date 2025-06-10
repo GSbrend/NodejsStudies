@@ -1,20 +1,9 @@
-const fs = require('fs');
-const superagent = require('superagent');
+const fs = require("fs");
+const { readFile } = require("fs/promises");
+// Superagent is a library for making HTTP requests
+// It is used to fetch data from APIs
+const superagent = require("superagent");
 
 fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
   console.log(`Raça: ${data}`);
-
-  superagent
-    .get(`https://dog.ceo/api/breed/${data}/images/random`)
-    .then(res => {
-      console.log(res.body.message);
-
-      fs.writeFile('dog-img.txt', res.body.message, (err) => {
-        if (err) return console.log(err.message);
-        console.log("Imagem salva!");
-      });
-    })
-    .catch(err => {
-      console.error(err.message);
-    });
 });
