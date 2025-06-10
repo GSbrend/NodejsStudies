@@ -49,7 +49,7 @@ server.on('request', (req, res) => {
 // // the response stream, which cannot handle all this 
 // // incoming data so fast; We call that "Backpressure"
 
-// // =========== Solution 3 - USING STREAM =================
+// // =========== Solution 3 - USING STREAM 2.0 ===============
 // // avoiding the problem in solution 2
 
 //     const readable = fs.createReadStream('test-file.txt');
