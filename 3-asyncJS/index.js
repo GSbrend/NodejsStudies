@@ -8,7 +8,8 @@ fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
     .then((res) => {
       console.log(res.body.message);
 
-      fs.writeFile(`${__dirname}/dog-image.txt`, res.body.message, (err) => {
+      fs.writeFile('dog-image.txt', res.body.message, (err) => {
+        if (err) return console.log(err.message);
         console.log("Imagem salva!");
       });
     })
