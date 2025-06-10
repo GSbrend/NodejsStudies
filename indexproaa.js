@@ -1,7 +1,6 @@
 // Studying async/await with promises based on the previous code snippet
 // named indexpro.js
 const fs = require("fs");
-const { get } = require("http");
 const superagent = require("superagent");
 
 const readFilePro = (file) => {
@@ -16,7 +15,7 @@ const readFilePro = (file) => {
 const writeFilePro = (file, data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(file, data, (err) => {
-      if (err) reject("file not written");
+      if (err) reject(`file not written: ${err.message}`);
       resolve("file written successfully");
     });
   });
@@ -28,16 +27,20 @@ const writeFilePro = (file, data) => {
 // the await stops the execution of the function until the promise is resolved
 // then the await will save the data returned by the promise
 const getDogImage = async () => {
-  const data = await readFilePro(`${__dirname}/dog.txt`);
-  console.log(`Raça: ${data}`);
-  // save the result of superagent.get (which is a promise) in a variable
-  const res = await superagent.get(
-    `https://dog.ceo/api/breed/${data}/images/random`
-  );
-  console.log(res.body.message);
-  //
-  await writeFilePro("dog-img.txt", res.body.message);
-  console.log("Random dog image saved to file");
+  try {
+    const data = await readFilePro(`${__dirname}/dog.txt`);
+    console.log(`Raça: ${data}`);
+    // save the result of superagent.get (which is a promise) in a variable
+    const res = await superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    console.log(res.body.message);
+    //
+    await writeFilePro("dog-img.txt", res.body.message);
+    console.log("Random dog image saved to file");
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 getDogImage();
 
