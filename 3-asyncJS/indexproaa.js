@@ -6,7 +6,7 @@ const superagent = require("superagent");
 const readFilePromisse = (file) => {
   return new Promise((resolve, reject) => {
     fs.readFile(file, (err, data) => {
-      if (err) reject("file not found");
+      if (err) return reject(err);
       resolve(data);
     });
   });
@@ -15,7 +15,7 @@ const readFilePromisse = (file) => {
 const writeFilePromisse = (file, data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(file, data, (err) => {
-      if (err) reject(`file not written: ${err.message}`);
+      if (err) return reject(err);
       resolve("file written successfully");
     });
   });
@@ -30,7 +30,7 @@ const getDogImage = async () => {
   try {
     // save the result of readFilePromisse in a variable
     // and log the breed of the dog from the file
-    const data = await readFilePromisse(`${__dirname}/dog.txt`);
+    const data = await readFilePromisse(`${__dirname}/dog12.txt`);
     console.log(`Raça: ${data}`);
     // save the result of superagent.get in a variable
     // and log the random dog image URL
@@ -38,13 +38,13 @@ const getDogImage = async () => {
       `https://dog.ceo/api/breed/${data}/images/random`
     );
     console.log(res.body.message);
-    // wait for the writeFilePromisse promise to resolve
-    // and writes the random dog image URL to a file named "dog-img.txt"
+    // waits for the writeFilePromisse promise to resolve
+    //and writes the random dog image URL to a file named "dog-img.txt"
     await writeFilePromisse("dog-img.txt", res.body.message);
     console.log("Random dog image saved to file");
     // if any of the promises fail, we catch the error and log it to the console
   } catch (err) {
-    console.error(err.message);
+    console.log('Algo deu errado: ', err.message);
   }
 };
 // calling the async function to execute the code

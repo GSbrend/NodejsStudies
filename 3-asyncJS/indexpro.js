@@ -16,7 +16,7 @@ const superagent = require("superagent");
 const readFilePro = (file) => {
   return new Promise((resolve, reject) => {
     fs.readFile(file, (err, data) => {
-      if (err) reject("file not found");
+      if (err) return reject(err);
       resolve(data);
     });
   });
@@ -34,7 +34,7 @@ const readFilePro = (file) => {
 const writeFilePro = (file, data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(file, data, (err) => {
-      if (err) reject("file not written");
+      if (err) return reject(err);
       resolve("file written successfully");
     });
   });
