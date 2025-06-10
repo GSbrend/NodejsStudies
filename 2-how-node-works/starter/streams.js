@@ -3,7 +3,7 @@ const fs = require('fs');
 // Ao invés de criar uma variavel http para depois
 // criar a variável server, criamos ela junto com o
 // require
-const server = require('http').createServer;
+const server = require('http').createServer();
 // reding a huge file to send back to the user
 // =========== BASIC WAY ===============
 server.on('request', (req, res) => {
