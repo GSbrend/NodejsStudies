@@ -30,7 +30,7 @@ const getDogImage = async () => {
   try {
     // save the result of readFilePromisse in a variable
     // and log the breed of the dog from the file
-    const data = await readFilePromisse(`${__dirname}/dog12.txt`);
+    const data = await readFilePromisse(`${__dirname}/dog.txt`);
     console.log(`Raça: ${data}`);
     // save the result of superagent.get in a variable
     // and log the random dog image URL
