@@ -25,10 +25,16 @@ server.on('request', (req, res) => {
 // chunks of data, we'll send back to the client as a 
 // writable stream
 
+//step1: Create a variable to save the readable stream
     const readable = fs.createReadStream('test-file.txt');
+//step2: listen to the readable stream and callback the
+//chunk that was read
     readable.on('data', chunk => {
-        res.write(chunk)
+        res.write(chunk);
     })
-
+//when the file is completely read
+    readable.on('end', () => {
+        res.end();
+    })
 });
 
