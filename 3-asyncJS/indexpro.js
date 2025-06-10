@@ -47,18 +47,18 @@ readFilePro(`${__dirname}/dog.txt`)
     console.log(`Raça: ${data}`);
     return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
   })
-// when the API call is successful, it will return a response
-// the response will contain a message with the URL of the random dog image
-// then we will write the URL to a file named "dog-img.txt"
+  // when the API call is successful, it will return a response
+  // and so the response will contain a message with the URL of the random dog image
+  // and writes the URL to a file named "dog-img.txt"
   .then((res) => {
     console.log(res.body.message);
     return writeFilePro("dog-img.txt", res.body.message);
   })
-// After writing the file, we log a success message to the console
+  // After writing the file, we log a success message to the console
   .then(() => {
     console.log("Random dog image saved to file");
   })
-// If any of the promises fail, we catch the error and log it to the console
+  // If any of the promises fail, we catch the error and log it to the console
   .catch((err) => {
     console.error(err.message);
   });
