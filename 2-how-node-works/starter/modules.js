@@ -12,7 +12,12 @@ console.log(calc1.add(5, 12));
 // const calc2 = require("./testmodule2");
 // console.log(calc2.multiply(5, 12));
 // // using destructuring
+
 const { add, devide, multiply } = require("./testmodule2");
 console.log(add(5, 12));
 console.log(devide(5, 12));
 console.log(multiply(5, 12));
+
+// caching
+require("./testmodule3")();
+require("./testmodule3")();
