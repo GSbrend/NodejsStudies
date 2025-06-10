@@ -26,7 +26,7 @@ server.on('request', (req, res) => {
 // writable stream
 
 //step1: Create a variable to save the readable stream
-    const readable = fs.createReadStream('testz-file.txt');
+    const readable = fs.createReadStream('test-file.txt');
 //step2: listen to the readable stream and callback the
 //chunk that was read
     readable.on('data', chunk => {
