@@ -2,7 +2,6 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 const app = express();
 const port = 3000;
 
@@ -15,6 +14,7 @@ const overviewTemplate = fs.readFileSync(
 const toursData = JSON.parse(
   fs.readFileSync(path.join(__dirname, '/dev-data/data/tours-simple.json'))
 );
+
 app.use(express.json()); // Middleware para analisar JSON no corpo das requisições
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -41,8 +41,7 @@ app.post('/api/v1/tours', (req, res) => {
   // Adiciona o novo tour ao array de tours
   toursData.push(newTour);
 
-  fs.writeFile(
-    path.join(__dirname, '/dev-data/data/tours-simple.json'),
+  fs.writeFile(path.join(__dirname, '/dev-data/data/tours-simple.json'),
     JSON.stringify(toursData),
     err => {
       res.status(201).json({
@@ -53,4 +52,5 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
+  res.end('done!');
 });
