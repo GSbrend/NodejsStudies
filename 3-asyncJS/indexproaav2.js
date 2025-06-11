@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { get } = require("http");
 const superagent = require("superagent");
 
 const readFilePromisse = (file) => {
@@ -21,34 +22,50 @@ const writeFilePromisse = (file, data) => {
 
 const getDogImage = async () => {
   try {
-    const data = await readFilePromisse(`${__dirname}/dogl.txt`);
+    const data = await readFilePromisse(`${__dirname}/dog.txt`);
     console.log(`Raça: ${data}`);
-    const res1 =  superagent.get(
+    const r1 =  superagent.get(
       `https://dog.ceo/api/breed/${data}/images/random`
     );
-    const res2 =  superagent.get(
+    const r2 =  superagent.get(
       `https://dog.ceo/api/breed/${data}/images/random`
     );
-    const res3 =  superagent.get(
+    const r3 =  superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const r4 =  superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const r5 =  superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const r6 =  superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const r7 =  superagent.get(
       `https://dog.ceo/api/breed/${data}/images/random`
     );
 
-    const res = await Promise.all([res1, res2, res3]);
+    const res = await Promise.all([r1, r2, r3, r4, r5, r6, r7]);
     const imgs = res.map(el => el.body.message);
     console.log(imgs);
     await writeFilePromisse("dog-img.txt", imgs.join('\n'));
-    console.log("Random dog image saved to file");
-    
+
   } catch (err) {
     console.log(`something went wrong: ${err}`);
     throw err; 
   }
+  return "2: Dog image fetched successfully!";
 };
-console.log("1: Will read file!");
-getDogImage().then((asyncFunction) => {
-  console.log(asyncFunction)
-  console.log("3: Done getting dog image!");
-}).catch((err) => {
-  console.log('Deu ruim')
-}
-);
+(async () => {
+  console.log("1: Will read file!");
+  console.log("waiting for the file to be read...");
+  try {
+    const i = await getDogImage();
+    console.log(i);
+    console.log("3: Done getting dog image!");
+  } catch (err) {
+    console.log('Deu ruim');
+  }
+})();
+console.log('this line is not blocked by the async function');
