@@ -42,7 +42,7 @@ app.post('/api/v1/tours', (req, res) => {
   toursData.push(newTour);
 
   fs.writeFile(
-    path.join(_dirname, '/dev-data/data/tours-simple.json'),
+    path.join(__dirname, '/dev-data/data/tours-simple.json'),
     JSON.stringify(toursData),
     err => {
       res.status(201).json({
