@@ -1,15 +1,40 @@
 import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 const app = express();
 const port = 3000;
-app.get('/', (req, res) => {
-  res.status(200)
-  .json({ message: 'Hello World!', app: 'natours_b' });
-});
 
-app.post('/', (req, res) => {
-  res.send('You can post to this endpoint, but it does not do anything yet.');
-}
+const __filepath = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filepath);
+const overviewTemplate = fs.readFileSync(
+  path.join(__dirname, '/public/overview.html'),
+  'utf-8'
 );
+const toursData = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '/dev-data/data/tours-simple.json'))
+);
+app.use(express.json()); // Middleware para analisar JSON no corpo das requisições
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+app.get('/', (req, res) => {
+  res.status(200).send(overviewTemplate);
+});
+
+app.get('/api/v1/tours', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    results: toursData.length, // É uma boa prática incluir o número de resultados
+    data: {
+      tours: toursData,
+    }
+  });
+});
+
+app.post('/api/v1/tours', (req, res) => {
+  console.log(req.body);
+  res.send('done');
 });
