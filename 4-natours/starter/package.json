@@ -1,7 +1,6 @@
 {
   "name": "natours_b",
   "version": "1.0.0",
-  "type": "module",
   "description": "learning node, express and mongodb",
   "main": "app.js",
   "scripts": {
