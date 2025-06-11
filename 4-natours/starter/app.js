@@ -35,6 +35,22 @@ app.get('/api/v1/tours', (req, res) => {
 });
 
 app.post('/api/v1/tours', (req, res) => {
-  console.log(req.body);
-  res.send('done');
+  //console.log(req.body);
+  const newId = toursData[toursData.length - 1].id + 1;
+  const newTour = Object.assign({ id: newId }, req.body);
+  // Adiciona o novo tour ao array de tours
+  toursData.push(newTour);
+
+  fs.writeFile(
+    path.join(__dirname, '/dev-data/data/tours-simple.json'),
+    JSON.stringify(toursData),
+    err => {
+      res.status(201).json({
+        status: 'success',
+        data: {
+          tour: newTour
+        }
+      });
+    }
+  );
 });
