@@ -1,0 +1,19 @@
+{
+  "name": "natours_b",
+  "version": "1.0.0",
+  "description": "learning node, express and mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "testapp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSbrend/NodejsStudies.git#main"
+  },
+  "author": "Brendon Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSbrend/NodejsStudies/issues"
+  },
+  "homepage": "https://github.com/GSbrend/NodejsStudies/tree/main#readme"
+}
