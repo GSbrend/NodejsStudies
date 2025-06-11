@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/GSbrend/NodejsStudies/issues"
   },
-  "homepage": "https://github.com/GSbrend/NodejsStudies/tree/main#readme"
+  "homepage": "https://github.com/GSbrend/NodejsStudies/tree/main#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^6.10.0",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb"
+  ]
 }
