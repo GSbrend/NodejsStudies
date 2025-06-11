@@ -4,7 +4,13 @@
 <meta http-equiv="Content-Security-Policy" 
       content="default-src 'self'; script-src 'self' 'unsafe-inline' http://127.0.0.1:*; connect-src 'self' ws://127.0.0.1:*;">    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' http://127.0.0.1:*; 
+               connect-src 'self' ws://127.0.0.1:*;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src https://fonts.gstatic.com;
+               img-src 'self' https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com data:;">
     <link
       href="https://fonts.googleapis.com/css?family=Megrim|Nunito+Sans:400,900"
       rel="stylesheet"
