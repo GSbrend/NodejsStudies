@@ -10,10 +10,6 @@ const toursData = JSON.parse(
 
 // 1) MIDDLEWARES
 
-app.listen(port, () => {
-  console.log(`Servidor está rodando na porta ${port}`);
-});
-
 app.use(morgan('dev')); // Log requests to the console
 
 app.use(express.json());
@@ -116,3 +112,9 @@ app
   .get(getTourById)
   .patch(updateTour)
   .delete(deleteTour);
+
+// 4) START SERVER
+
+app.listen(port, () => {
+  console.log(`Servidor está rodando na porta ${port}`);
+});
