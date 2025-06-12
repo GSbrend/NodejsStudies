@@ -138,7 +138,7 @@ const deleteTour = (req, res) => {
 
 //makes the tourRouter only run in this especific url
 const tourRouter = express.Router();
-app.use('/api/v1/tours', tourRouter);
+const userRouter = express.Router();
 
 tourRouter
   .route('/')
@@ -151,14 +151,17 @@ tourRouter
   .patch(updateTour)
   .delete(deleteTour);
 
-app.route('/api/v1/users')
+userRouter.route('/')
   .get(getAllUsers)
   .patch(createUser);
 
-app.route('/api/v1/users/:id')
+userRouter.route('/:id')
   .get(getUserById)
   .patch(updateUser)
   .delete(deleteUser);
+
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
 
 // 4) START SERVER
 
