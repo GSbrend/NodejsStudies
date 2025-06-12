@@ -91,7 +91,10 @@ const deleteTour = (req, res) => {
 //
 //// simplify the code by chaining the methods
 
-app.route('api/v1/tours').get(getAllTours).post(createTour);
+// prettier-ignore
+app.route('api/v1/tours')
+.get(getAllTours)
+.post(createTour);
 
 app
   .route('/api/v1/tours/:id')
