@@ -4,7 +4,9 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-const toursData = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
+const toursData = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
 
 app.use(express.json());
 
@@ -22,10 +24,10 @@ app.get('/api/v1/tours', (req, res) => {
   });
 });
 
-app.get('/api/v1/tours/:id', (req, res) => {
+app.get('/api/v1/tours/:id?', (req, res) => {
   console.log(req.params);
   const id = req.params.id * 1; // Converte o id para número
-  const tour = toursData.find(el => el.id === id);
+  const tour = toursData.find((el) => el.id === id);
   if (!tour) {
     return res.status(404).json({
       status: 'fail',
@@ -41,19 +43,17 @@ app.get('/api/v1/tours/:id', (req, res) => {
 });
 
 app.post('/api/v1/tours', (req, res) => {
-  // // phase 1
-  // console.log(req.body);
-  // res.send('done');
-
-  // phase 2
   const newId = toursData[toursData.length - 1].id + 1;
   const newTour = Object.assign({ id: newId }, req.body);
   toursData.push(newTour);
-    fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(toursData), (err) => {
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(toursData),
+    (err) => {
       res.status(201).json({
         status: 'success',
         data: {
-          tour: newTour
+          tour: newTour,
         },
       });
     }
