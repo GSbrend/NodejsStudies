@@ -38,7 +38,7 @@ const getUserById = (req, res) => {
     status: 'error',
     message: 'This route is not defined yet',
   });
-}
+};
 
 const createUser = (req, res) => {
   res.status(500).json({
@@ -149,7 +149,7 @@ app
 
 app.route('/api/v1/users')
   .get(getAllUsers)
-  .patch(createUser)
+  .patch(createUser);
 
 app.route('/api/v1/users/:id')
   .get(getUserById)
