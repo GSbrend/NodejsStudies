@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const morgan = require('morgan');
 const app = express();
 const port = 3000;
 const version = 'v1';
@@ -7,7 +8,11 @@ const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
-// middleware to analyze the request body of the incoming request
+// MIDDLEWARES
+app.listen(port, () => {
+  console.log(`Servidor está rodando na porta ${port}`);
+});
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -20,9 +25,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(port, () => {
-  console.log(`Servidor está rodando na porta ${port}`);
-});
+app.route(`/api/${version}/tours`).get(getAllTours).post(createTour);
+
+app
+  .route(`/api/${version}/tours/:id`)
+  .get(getTourById)
+  .patch(updateTour)
+  .delete(deleteTour);
+
+// ROUTE HANDLERS
 
 const getAllTours = (req, res) => {
   res.status(200).json({
@@ -96,24 +107,3 @@ const deleteTour = (req, res) => {
     data: null,
   });
 };
-
-//// unchained methods
-//
-// app.get('/api/v1/tours', getAllTours);
-// app.get('/api/v1/tours/:id?', getTourById);
-// app.post('/api/v1/tours', createTour);
-// app.patch('/api/v1/tours/:id', updateTour);
-// app.delete('/api/v1/tours/:id', deleteTour);
-//
-//// simplify the code by chaining the methods
-
-// prettier-ignore
-app.route(`/api/${version}/tours`)
-.get(getAllTours)
-.post(createTour);
-
-app
-  .route(`/api/${version}/tours/:id`)
-  .get(getTourById)
-  .patch(updateTour)
-  .delete(deleteTour);
