@@ -15,6 +15,11 @@ app.use((req, res, next) => {
   next(); // Call next() to pass control to the next middleware or route handler
 });
 
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);
 });
