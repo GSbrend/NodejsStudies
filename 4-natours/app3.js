@@ -137,8 +137,8 @@ const deleteTour = (req, res) => {
 // 3) ROUTES
 
 //makes the tourRouter only run in this especific url
-app.use('/api/v1/tours', tourRouter);
 const tourRouter = express.Router();
+app.use('/api/v1/tours', tourRouter);
 
 tourRouter
   .route('/')
