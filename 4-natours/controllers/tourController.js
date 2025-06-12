@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
@@ -27,7 +26,6 @@ exports.checkBody = (req, res, next) => {
 
 
 exports.getAllTours = (req, res) => {
-  console.log(req.body.price);
   res.status(200).json({
     status: 'success',
     results: toursData.length, //include the number of results
@@ -38,12 +36,12 @@ exports.getAllTours = (req, res) => {
 };
 
 exports.getTourById = (req, res) => {
-  console.log(req.body.price);
   const id = req.params.id * 1; // Converte o id para número
+  const tour = toursData.find(el => el.id === id);
   res.status(200).json({
     status: 'success',
     data: {
-      tour,
+      tour
     },
   });
 };
