@@ -8,7 +8,8 @@ const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
-// MIDDLEWARES
+// 1) MIDDLEWARES
+
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);
 });
@@ -25,19 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// prettier-ignore
-app
-  .route(`/api/${version}/tours`)
-  .get(getAllTours)
-  .post(createTour);
-
-app
-  .route(`/api/${version}/tours/:id`)
-  .get(getTourById)
-  .patch(updateTour)
-  .delete(deleteTour);
-
-// ROUTE HANDLERS
+// 2) ROUTE HANDLERS
 
 const getAllTours = (req, res) => {
   res.status(200).json({
@@ -111,3 +100,17 @@ const deleteTour = (req, res) => {
     data: null,
   });
 };
+
+// 3) ROUTES
+
+// prettier-ignore
+app
+  .route(`/api/${version}/tours`)
+  .get(getAllTours)
+  .post(createTour);
+
+app
+  .route(`/api/${version}/tours/:id`)
+  .get(getTourById)
+  .patch(updateTour)
+  .delete(deleteTour);
