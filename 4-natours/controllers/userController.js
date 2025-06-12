@@ -4,8 +4,8 @@ const usersData = JSON.parse(
 );
 
 exports.checkUserId = (req, res, next, val) => {
-    console.log(`user ID is: ${val}`);
-    if (!req.body.id * 1 != usersData.body.id){
+  const id = usersData.find(el => el._id === id)
+    if (!id) {
       return res.status(404).json({
         status: 'error',
         message: 'Id not found, please check if the user exists.'
@@ -26,11 +26,17 @@ exports.getAllUsers = (req, res) => {
 
 exports.getUserById = (req, res) => {
   const id = req.params.id * 1; // Converte o id para número
-  const user = usersData.find(el => el.id ===id);
+  const user = usersData.find(el => el._id === id);
+  if (!user) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'User not found',
+    });
+  }
   res.status(200).json({
     status: 'success',
     data: {
-      user
+      user: usersData.find(el => el._id)
     },
   });
 };
