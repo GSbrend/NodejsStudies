@@ -62,9 +62,9 @@ app.post('/api/v1/tours', (req, res) => {
 
 app.patch('/api/v1/tours/:id', (req, res) => {
   if (!req.params.id * 1 > toursData.length) {
-    return res.status(400).json({
+    return res.status(404).json({
       status: 'fail',
-      message: 'tour not found',
+      message: 'id not found',
     });
   }
   res.status(200).json({
@@ -72,5 +72,18 @@ app.patch('/api/v1/tours/:id', (req, res) => {
     data: {
       tour: '<Updated tour here>',
     },
+  });
+});
+
+app.delete('/api/v1/tours/:id', (req, res) => {
+  if (!req.params.id * 1 > toursData.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'id not found',
+    });
+  }
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 });
