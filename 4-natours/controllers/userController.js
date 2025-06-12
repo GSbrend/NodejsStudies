@@ -25,7 +25,7 @@ exports.getAllUsers = (req, res) => {
 };
 
 exports.getUserById = (req, res) => {
-  const id = req.params.id * 1; // Converte o id para número
+  const id = req.params.id; // Converte o id para número
   const user = usersData.find(el => el._id === id);
   if (!user) {
     return res.status(404).json({
@@ -36,7 +36,7 @@ exports.getUserById = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      user: usersData.find(el => el._id)
+      user: usersData.find(el => el._id === id)
     },
   });
 };
