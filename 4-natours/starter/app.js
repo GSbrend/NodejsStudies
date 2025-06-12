@@ -23,6 +23,17 @@ app.get('/api/v1/tours', (req, res) => {
   });
 });
 
+app.get('/api/v1/tours/:id', (req, res) => {
+  console.log(req.params);
+  res.status(200).json({
+    status: 'success',
+    // results: toursData.length, // É uma boa prática incluir o número de resultados
+    // data: {
+    //   tours: toursData,
+    // },
+  });
+});
+
 app.post('/api/v1/tours', (req, res) => {
   // // phase 1
   // console.log(req.body);
