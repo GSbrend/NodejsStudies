@@ -10,12 +10,24 @@ exports.checkID = (req, res, next, val) => {
     return res.status(404).json({
       status: 'fail',
       message: 'id not found',
-    });
+    })
   }
   next();
-}
+};
+
+exports.checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Missing name or price',
+    })
+  }
+  next();
+};
+
 
 exports.getAllTours = (req, res) => {
+  console.log(req.body.price);
   res.status(200).json({
     status: 'success',
     results: toursData.length, //include the number of results
@@ -26,14 +38,8 @@ exports.getAllTours = (req, res) => {
 };
 
 exports.getTourById = (req, res) => {
+  console.log(req.body.price);
   const id = req.params.id * 1; // Converte o id para número
-  // const tour = toursData.find((el) => el.id === id);
-  // if (!tour) {
-  //   return res.status(404).json({
-  //     status: 'fail',
-  //     message: 'Tour not found',
-  //   });
-  // }
   res.status(200).json({
     status: 'success',
     data: {
@@ -61,12 +67,6 @@ exports.createTour = (req, res) => {
 };
 
 exports.updateTour = (req, res) => {
-  // if (!req.params.id * 1 > toursData.length) {
-  //   return res.status(404).json({
-  //     status: 'fail',
-  //     message: 'id not found',
-  //   });
-  // }
   res.status(200).json({
     status: 'success',
     data: {
@@ -80,4 +80,4 @@ exports.deleteTour = (req, res) => {
     status: 'success',
     data: null,
   });
-}
+};
