@@ -24,12 +24,19 @@ app.get('/api/v1/tours', (req, res) => {
 
 app.get('/api/v1/tours/:id', (req, res) => {
   console.log(req.params);
+  const id = req.params.id * 1; // Converte o id para número
+  const tour = toursData.find(el => el.id === id);
+  if (!tour) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Tour not found',
+    });
+  }
   res.status(200).json({
     status: 'success',
-    // results: toursData.length, // É uma boa prática incluir o número de resultados
-    // data: {
-    //   tours: toursData,
-    // },
+    data: {
+      tour,
+    },
   });
 });
 
