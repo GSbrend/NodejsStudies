@@ -7,22 +7,18 @@ const version = 'v1';
 const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
-
+const reqTimeAt = (req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+}
 // 1) MIDDLEWARES
+
 
 app.use(morgan('dev')); // Log requests to the console
 
-app.use(express.json());
+app.use(express.json()); // Parse JSON bodies (as sent by API clients)
 
-app.use((req, res, next) => {
-  console.log('hello there from the middleware');
-  next(); // Call next() to pass control to the next middleware or route handler
-});
-
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
+app.use(reqTimeAt);
 
 // 2) ROUTE HANDLERS
 
