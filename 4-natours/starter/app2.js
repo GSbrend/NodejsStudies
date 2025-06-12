@@ -9,6 +9,7 @@ const toursData = JSON.parse(
 
 // middleware to analyze the request body of the incoming request
 app.use(express.json());
+// creating a middleware function
 
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);
@@ -25,7 +26,6 @@ const getAllTours = (req, res) => {
 };
 
 const getTourById = (req, res) => {
-  console.log(req.params);
   const id = req.params.id * 1; // Converte o id para número
   const tour = toursData.find((el) => el.id === id);
   if (!tour) {
@@ -100,12 +100,17 @@ const deleteTour = (req, res) => {
 
 // prettier-ignore
 app
-  .route(`api/${version}/tours`)
+  .route('api/v1/tours')
   .get(getAllTours)
   .post(createTour);
 
+app.use((req, res, next) => {
+  console.log('hello there from the middleware');
+  next(); // Call next() to pass control to the next middleware or route handler
+});
+
 app
-  .route(`api/${version}/tours:id`)
+  .route('api/v1/tours:id')
   .get(getTourById)
   .patch(updateTour)
   .delete(deleteTour);
