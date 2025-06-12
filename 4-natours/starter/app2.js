@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const port = 3000;
-// const version = 'v1';
+const version = 'v1';
 const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
@@ -108,12 +108,12 @@ const deleteTour = (req, res) => {
 //// simplify the code by chaining the methods
 
 // prettier-ignore
-app.route('/api/v1/tours')
+app.route(`/api/${version}/tours`)
 .get(getAllTours)
 .post(createTour);
 
 app
-  .route('/api/v1/tours:id')
+  .route(`/api/${version}/tours/:id`)
   .get(getTourById)
   .patch(updateTour)
   .delete(deleteTour);
