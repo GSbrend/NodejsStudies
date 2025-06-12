@@ -20,6 +20,7 @@ app.use(express.json()); // Parse JSON bodies (as sent by API clients)
 
 app.use(reqTimeAt);
 
+
 // 2) ROUTE HANDLERS
 
 const getAllUsers = (req, res) => {

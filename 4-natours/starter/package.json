@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/GSbrend/NodejsStudies/tree/main#readme",
   "dependencies": {
+    "nodemon": "^3.1.10",
     "dotenv": "^16.0.3",
     "express": "^4.21.2",
     "mongoose": "^6.10.0",
@@ -26,8 +27,5 @@
     "node",
     "express",
     "mongodb"
-  ],
-  "devDependencies": {
-    "nodemon": "^3.1.10"
-  }
+  ]
 }
