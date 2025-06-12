@@ -2,11 +2,14 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const port = 3000;
+const version = 'v1';
 const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
+// middleware to analyze the request body of the incoming request
 app.use(express.json());
+
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);
 });
@@ -14,12 +17,13 @@ app.listen(port, () => {
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
-    results: toursData.length, // É uma boa prática incluir o número de resultados
+    results: toursData.length, //include the number of results
     data: {
       tours: toursData,
     },
   });
 };
+
 const getTourById = (req, res) => {
   console.log(req.params);
   const id = req.params.id * 1; // Converte o id para número
@@ -37,6 +41,7 @@ const getTourById = (req, res) => {
     },
   });
 };
+
 const createTour = (req, res) => {
   const newId = toursData[toursData.length - 1].id + 1;
   const newTour = Object.assign({ id: newId }, req.body);
@@ -54,6 +59,7 @@ const createTour = (req, res) => {
     }
   );
 };
+
 const updateTour = (req, res) => {
   if (!req.params.id * 1 > toursData.length) {
     return res.status(404).json({
@@ -68,6 +74,7 @@ const updateTour = (req, res) => {
     },
   });
 };
+
 const deleteTour = (req, res) => {
   if (!req.params.id * 1 > toursData.length) {
     return res.status(404).json({
@@ -92,12 +99,13 @@ const deleteTour = (req, res) => {
 //// simplify the code by chaining the methods
 
 // prettier-ignore
-app.route('api/v1/tours')
-.get(getAllTours)
-.post(createTour);
+app
+  .route(`api/${version}/tours`)
+  .get(getAllTours)
+  .post(createTour);
 
 app
-  .route('/api/v1/tours/:id')
+  .route(`api/${version}/tours:id`)
   .get(getTourById)
   .patch(updateTour)
   .delete(deleteTour);
