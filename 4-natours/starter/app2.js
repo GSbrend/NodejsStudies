@@ -2,14 +2,18 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const port = 3000;
-const version = 'v1';
+// const version = 'v1';
 const toursData = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
 // middleware to analyze the request body of the incoming request
 app.use(express.json());
-// creating a middleware function
+
+app.use((req, res, next) => {
+  console.log('hello there from the middleware');
+  next(); // Call next() to pass control to the next middleware or route handler
+});
 
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);
@@ -99,18 +103,12 @@ const deleteTour = (req, res) => {
 //// simplify the code by chaining the methods
 
 // prettier-ignore
-app
-  .route('api/v1/tours')
-  .get(getAllTours)
-  .post(createTour);
-
-app.use((req, res, next) => {
-  console.log('hello there from the middleware');
-  next(); // Call next() to pass control to the next middleware or route handler
-});
+app.route('/api/v1/tours')
+.get(getAllTours)
+.post(createTour);
 
 app
-  .route('api/v1/tours:id')
+  .route('/api/v1/tours:id')
   .get(getTourById)
   .patch(updateTour)
   .delete(deleteTour);
