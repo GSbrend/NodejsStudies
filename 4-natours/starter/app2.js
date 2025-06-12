@@ -26,6 +26,41 @@ app.use((req, res, next) => {
 
 // 2) ROUTE HANDLERS
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined yet',
+  });
+};
+
+const getUserById = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined yet',
+  });
+}
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined yet',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined yet',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined yet',
+  });
+};
+
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -101,7 +136,6 @@ const deleteTour = (req, res) => {
 
 // 3) ROUTES
 
-// prettier-ignore
 app
   .route(`/api/${version}/tours`)
   .get(getAllTours)
@@ -112,6 +146,15 @@ app
   .get(getTourById)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route('/api/v1/users')
+  .get(getAllUsers)
+  .patch(createUser)
+
+app.route('/api/v1/users/:id')
+  .get(getUserById)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 // 4) START SERVER
 
