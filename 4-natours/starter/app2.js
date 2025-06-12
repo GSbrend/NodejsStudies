@@ -25,7 +25,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.route(`/api/${version}/tours`).get(getAllTours).post(createTour);
+// prettier-ignore
+app
+  .route(`/api/${version}/tours`)
+  .get(getAllTours)
+  .post(createTour);
 
 app
   .route(`/api/${version}/tours/:id`)
