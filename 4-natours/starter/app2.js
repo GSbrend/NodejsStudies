@@ -14,6 +14,8 @@ app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);
 });
 
+app.use(morgan('dev')); // Log requests to the console
+
 app.use(express.json());
 
 app.use((req, res, next) => {
