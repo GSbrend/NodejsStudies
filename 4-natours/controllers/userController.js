@@ -4,11 +4,13 @@ const usersData = JSON.parse(
 );
 
 exports.checkUserId = (req, res, next, val) => {
-  const id = usersData.find((el) => el._id === id);
-  if (!id) {
+  const id = req.params.id;
+  const user = usersData.find((el) => el._id === id);
+  console.log(user);
+  if (!user) {
     return res.status(404).json({
-      status: 'error',
-      message: 'Id not found, please check if the user exists.',
+      status: 'fail',
+      message: 'User not found',
     });
   }
   next();
@@ -27,16 +29,10 @@ exports.getAllUsers = (req, res) => {
 exports.getUserById = (req, res) => {
   const id = req.params.id;
   const user = usersData.find((el) => el._id === id);
-  if (!user) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'User not found',
-    });
-  }
   res.status(200).json({
     status: 'success',
     data: {
-      user: usersData.find((el) => el._id === id),
+      user,
     },
   });
 };

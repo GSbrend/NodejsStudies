@@ -2,19 +2,16 @@ const express = require('express');
 const userController = require('./../controllers/userController');
 const router = express.Router();
 
-router.param('id', (req, res, next, val) => {
-  console.log(`user ID is: ${val}`);
-  next();
-});
+router.param('id', userController.checkUserId);
 
 router
   .route('/')
   .get(userController.getAllUsers)
-  .patch(userController.createUser);
+  .post(userController.createUser)
 
 router
   .route('/:id')
-  .get(userController.checkUserId, userController.getUserById)
+  .get(userController.getUserById)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
