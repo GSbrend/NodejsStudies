@@ -8,6 +8,7 @@ exports.checkUserId = (req, res, next, val) => {
   const user = usersData.find((el) => el._id === id);
   console.log(user);
   if (!user) {
+    console.log('user not found!');
     return res.status(404).json({
       status: 'fail',
       message: 'User not found',
