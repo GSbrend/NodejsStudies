@@ -1,5 +1,5 @@
 const express = require('express');
-const tourController = require('./../controllers/tourController');
+const tourController = require('../controllers/tourController');
 const router = express.Router();
 
 // as this middleware is inside the tourRoutes file, it will only apply to routes defined in this file
