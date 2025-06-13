@@ -4,15 +4,15 @@ const usersData = JSON.parse(
 );
 
 exports.checkUserId = (req, res, next, val) => {
-  const id = usersData.find(el => el._id === id)
-    if (!id) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Id not found, please check if the user exists.'
-      })
-    }
-    next();
+  const id = usersData.find((el) => el._id === id);
+  if (!id) {
+    return res.status(404).json({
+      status: 'error',
+      message: 'Id not found, please check if the user exists.',
+    });
   }
+  next();
+};
 
 exports.getAllUsers = (req, res) => {
   res.status(200).json({
@@ -26,7 +26,7 @@ exports.getAllUsers = (req, res) => {
 
 exports.getUserById = (req, res) => {
   const id = req.params.id;
-  const user = usersData.find(el => el._id === id);
+  const user = usersData.find((el) => el._id === id);
   if (!user) {
     return res.status(404).json({
       status: 'fail',
@@ -36,7 +36,7 @@ exports.getUserById = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      user: usersData.find(el => el._id === id)
+      user: usersData.find((el) => el._id === id),
     },
   });
 };
@@ -61,4 +61,3 @@ exports.deleteUser = (req, res) => {
     message: 'This route is not defined yet',
   });
 };
-

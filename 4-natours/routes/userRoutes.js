@@ -14,7 +14,7 @@ router
 
 router
   .route('/:id')
-  .get(userController.checkUserId,userController.getUserById)
+  .get(userController.checkUserId, userController.getUserById)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
