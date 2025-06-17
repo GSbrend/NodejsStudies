@@ -1,19 +1,23 @@
 // isn't express? so be my guest!
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const app = require('./app');
-const DB = process.env.DB.replace('<PASSWORD>', process.env.DB_PASSWORD);
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const app = require("./app");
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 
-mongoose.connect(DB, {
-  useNewUrlParses: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-}).then(con = {
-  console.log(con.connections);
-  console.log
-})
+const DB = process.env.DATABASE.replace("<password>", process.env.DB_PASSWORD);
+
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+  })
+  .then((con) => {
+    console.log(con.connections);
+    console.log("DB connection successfull");
+  });
 
 const port = process.env.PORT;
 app.listen(port, () => {
